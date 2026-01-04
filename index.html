@@ -1,23 +1,396 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <!-- Schema.org 구조화 데이터 (LocalBusiness & MovingCompany 확장) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MovingCompany",
+      "name": "아파트 포장이사 전문 이사센터",
+      "description": "2026년 아파트 포장이사 최적의 솔루션을 제공합니다. 비용 절약부터 안전한 짐 보관, 프리미엄 정리정돈 서비스까지.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "경기도 양주시 XXX로 XX",
+        "addressLocality": "양주시",
+        "addressRegion": "경기도",
+        "postalCode": "114XX",
+        "addressCountry": "KR"
+      },
+      "telephone": "+82-31-XXX-XXXX",
+      "url": "https://www.example.com/apartment-packing-moving",
+      "openingHours": "Mo-Su 08:00-20:00",
+      "image": "https://www.example.com/images/apartment-moving-service.jpg",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "아파트 이사 서비스",
+        "itemListElement": [
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"프리미엄 아파트 포장이사"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"일반 아파트 포장이사"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"아파트 보관 이사"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"이사 후 정리정돈 서비스"}}
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "125"
+      }
+    }
+    </script>
+
+    <!-- 스타일: 부드러운 색감과 명확한 계층구조 적용 -->
+    <style>
+      :root {
+        --primary-color: #0078D7; /* 주색상 (소프트 블루) */
+        --secondary-color: #28a745; /* 강조색 (그린) */
+        --background-light: #f7f9fb; /* 배경색 */
+        --text-color: #333;
+        --border-color: #e0e0e0;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; margin: 0; padding: 0; color: var(--text-color); line-height: 1.8; background-color: var(--background-light); }
+      header, section, footer { max-width: 900px; margin: 0 auto; padding: 30px 20px; box-sizing: border-box; }
+      h1, h2, h3 { color: #222; margin-top: 0; line-height: 1.4; }
+      h1 { font-size: 2.5em; text-align: center; margin-bottom: 10px; }
+      h2 { font-size: 2em; border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-top: 40px; }
+      h3 { font-size: 1.5em; margin-top: 30px; color: var(--primary-color); }
+      p { margin-bottom: 15px; }
+      .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+      
+      /* CTA 버튼 스타일 */
+      .cta-btn { display: inline-block; background: var(--secondary-color); color: #fff; padding: 18px 30px; border-radius: 8px; text-decoration: none; font-size: 1.1em; font-weight: bold; transition: background 0.3s, transform 0.3s; box-shadow: 0 4px 10px rgba(0, 120, 215, 0.2); text-align: center; line-height: 1; margin: 20px 0; border: none; cursor: pointer; }
+      .cta-btn:hover { background: #1e8f3a; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 120, 215, 0.3); }
+      .cta-section { text-align: center; margin: 40px 0; }
+
+      /* 내비게이션 스타일 */
+      nav { background-color: var(--primary-color); padding: 15px 0; box-shadow: var(--shadow); }
+      nav ul { list-style: none; padding: 0; display: flex; justify-content: center; margin: 0; gap: 20px; }
+      nav a { text-decoration: none; color: #fff; font-weight: bold; transition: color 0.3s; padding: 5px 10px; }
+      nav a:hover { color: #e0e0e0; }
+
+      /* 서비스 카드 스타일 */
+      .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+      .service-card { background: #fff; border-radius: 10px; padding: 25px; box-shadow: var(--shadow); border: 1px solid var(--border-color); transition: transform 0.3s; }
+      .service-card:hover { transform: translateY(-5px); }
+      .service-card h4 { color: var(--primary-color); margin-bottom: 10px; border-left: 4px solid var(--secondary-color); padding-left: 10px; }
+
+      /* 표 스타일 */
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; box-shadow: var(--shadow); }
+      th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+      th { background-color: var(--primary-color); color: #fff; font-weight: bold; }
+
+      /* FAQ 아코디언 스타일 */
+      .faq-item { background: #fff; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: var(--shadow); }
+      .faq-question { padding: 18px; cursor: pointer; background-color: var(--background-light); font-weight: bold; position: relative; border-bottom: 1px solid var(--border-color); }
+      .faq-question::after { content: '+'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); transition: transform 0.3s; }
+      .faq-question.active::after { content: '-'; }
+      .faq-answer { display: none; padding: 18px; border-top: 1px solid var(--border-color); background-color: #ffffff; }
+
+      /* 폼 스타일 */
+      form label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary-color); }
+      form input[type="text"], form input[type="tel"], form textarea, form select { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; }
+      form textarea { resize: vertical; }
+
+      /* 기타 요소 */
+      .highlight { color: var(--secondary-color); font-weight: bold; }
+      .review-card { background: #fff; border-left: 5px solid var(--primary-color); padding: 20px; margin-bottom: 15px; border-radius: 5px; box-shadow: var(--shadow); }
+      .review-author { font-weight: bold; color: var(--primary-color); margin-top: 10px; display: block; }
+      .review-rating { color: gold; font-size: 1.2em; }
+      .internal-links { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: var(--shadow); margin-top: 30px; }
+      .internal-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+      .internal-links a { text-decoration: none; color: #fff; background-color: #aaa; padding: 8px 15px; border-radius: 20px; font-size: 0.9em; transition: background 0.3s; }
+      .internal-links a:hover { background-color: var(--primary-color); }
+    </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <h1>아파트 포장이사 전문가 추천: 2026년 이사 비용 절약 노하우 및 내돈내산 후기</h1>
+    <p>아파트 이사, 짐 보관, 프리미엄 포장이사 등 맞춤형 서비스 제공. 서울, 경기, 부산 등 전국 아파트 이사 전문.</p>
+    <div class="cta-section">
+      <a href="#quote-form" class="cta-btn">무료 견적 상담 받기 (2026년 최신 비용 분석)</a>
+    </div>
+  </header>
+
+  <!-- 내비게이션 -->
+  <nav>
+    <ul>
+      <li><a href="#services">서비스 안내</a></li>
+      <li><a href="#pricing">비용 분석표</a></li>
+      <li><a href="#review">고객 후기</a></li>
+      <li><a href="#checklist">이사 체크리스트</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#quote-form">견적 요청</a></li>
+    </ul>
+  </nav>
+
+  <!-- 메인 콘텐츠 섹션 시작 -->
+  <div class="container">
+
+    <!-- 키워드 기반 내부 링크 섹션 (검색 자동완성 및 연관검색어 반영) -->
+    <section class="internal-links">
+      <h2>아파트 포장이사 관련 연관 키워드</h2>
+      <p>검색 엔진에서 "아파트 포장이사"와 함께 많이 찾는 키워드를 통해 더 다양한 정보를 얻으실 수 있습니다.</p>
+      <ul>
+        <li><a href="#pricing">아파트 포장이사 저렴한곳</a></li>
+        <li><a href="#review">아파트 포장이사 내돈내산 후기</a></li>
+        <li><a href="#services">프리미엄 포장이사 추천</a></li>
+        <li><a href="#services">아파트 짐 보관 이사 비용</a></li>
+        <li><a href="#pricing">이사 견적 비교</a></li>
+        <li><a href="#checklist">이사 준비물 체크리스트</a></li>
+        <li><a href="#cities">아파트 포장이사 전국 지점</a></li>
+      </ul>
+    </section>
+
+    <!-- 1. 아파트 포장이사 서비스 소개 및 전문성 강조 -->
+    <section id="services">
+      <h2>아파트 포장이사, 왜 전문 업체가 필요할까요?</h2>
+      <p>아파트는 일반 주택이나 원룸 이사와는 다른 특성을 가집니다. 특히 고층 아파트의 경우 엘리베이터 사용 예약, 관리사무소 협의, 사다리차 이용 가능 여부 등 고려할 사항이 많습니다. 아파트 포장이사는 이러한 특성을 완벽히 이해하고, 짐의 양과 특성에 따라 맞춤형 서비스를 제공해야 합니다.</p>
+      <p>저희 아파트 포장이사 센터는 2026년 최신 이사 동향을 반영하여, <span class="highlight">파손 방지 포장, 전문 인력 배치, 운송 장비 최적화</span>를 통해 고객 만족도를 높이고 있습니다. 단순히 짐을 옮기는 것을 넘어, 고객님의 새로운 보금자리를 완벽하게 정리해드리는 프리미엄 서비스를 지향합니다.</p>
+
+      <h3>프리미엄 아파트 포장이사 서비스 (All-in-One Package)</h3>
+      <div class="service-grid">
+        <div class="service-card">
+          <h4>포장: 완벽한 짐 보호</h4>
+          <p>가구/가전 보호 커버, 의류 전용 행거 박스, 식기류 에어캡 포장 등 이사 물품에 맞춘 전문 포장재 사용.</p>
+        </div>
+        <div class="service-card">
+          <h4>운반: 신속하고 안전하게</h4>
+          <p>전문 운송 차량(탑차) 및 사다리차 보유. 숙련된 이사팀이 안전하게 운반하며, 층간 소음 최소화.</p>
+        </div>
+        <div class="service-card">
+          <h4>정리: 깔끔한 마무리</h4>
+          <p>주방, 거실, 침실 등 지정된 위치에 짐 정리 및 가구 배치. 청소 및 스팀 청소 서비스(프리미엄 옵션).</p>
+        </div>
+      </div>
+
+      <p>아파트 이사의 핵심은 <span class="highlight">이사 전후의 정리정돈</span>입니다. 특히 빌트인 가구와 복잡한 수납공간이 많은 아파트 구조에 맞춰, 정리 전문가가 짐을 풀어 드리는 서비스를 제공합니다. <a href="#quote-form" class="cta-btn">프리미엄 서비스 견적 문의</a></p>
+    </section>
+
+    <!-- 2. 비용 분석 및 절약 가이드 (저렴한곳, 싼곳 키워드 반영) -->
+    <section id="pricing">
+      <h2>2026년 아파트 포장이사 비용 분석 및 절약 노하우</h2>
+      <p>이사 비용은 이사 날짜, 짐의 양, 이사 거리, 인력 규모, 옵션 서비스(에어컨 설치, 입주 청소 등)에 따라 크게 달라집니다. "아파트 포장이사 저렴한곳"을 찾기 위해 단순히 최저가만 고집하는 것은 위험할 수 있습니다. <span class="highlight">투명한 견적 비교</span>와 서비스의 질을 함께 고려하는 것이 중요합니다.</p>
+
+      <h3>아파트 이사 비용에 영향을 미치는 주요 요인</h3>
+      <ul>
+        <li><strong>이사 시기:</strong> 손 없는 날(길일)이나 주말, 2~3월 이사 성수기는 비용이 상승합니다.</li>
+        <li><strong>짐의 양:</strong> 짐이 많을수록 인력 및 차량 투입 규모가 커져 비용이 증가합니다.</li>
+        <li><strong>이사 환경:</strong> 아파트의 층수, 엘리베이터 유무, 사다리차 사용 가능 여부 등이 중요합니다.</li>
+        <li><strong>옵션 서비스:</strong> 에어컨 탈부착, 입주 청소, 짐 보관 서비스 등 추가 시 비용이 발생합니다.</li>
+      </ul>
+
+      <h3>서비스 비교: 일반 포장이사 vs. 프리미엄 포장이사</h3>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>일반 포장이사</th>
+            <th>프리미엄 포장이사 (추천)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>가격대 (24평 기준)</td>
+            <td>50만 ~ 80만원대</td>
+            <td>80만 ~ 150만원대</td>
+          </tr>
+          <tr>
+            <td>포장 수준</td>
+            <td>기본 포장 및 정리</td>
+            <td>맞춤형 포장, 가구/가전 보호커버, 멸균/방역 서비스(추가 가능)</td>
+          </tr>
+          <tr>
+            <td>정리 수준</td>
+            <td>큰 짐 배치 및 기본 정리</td>
+            <td>주방 식기류 정리, 옷장 정리, 가구 재배치, 스팀 청소 서비스</td>
+          </tr>
+          <tr>
+            <td>추천 대상</td>
+            <td>가성비 이사를 원하며, 직접 정리가 가능한 고객</td>
+            <td>이사 후 바로 생활하기를 원하며, 꼼꼼한 정리 정돈을 원하는 고객</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cta-section">
+        <a href="#quote-form" class="cta-btn">정확한 아파트 이사 견적 문의하기</a>
+      </div>
+    </section>
+
+    <!-- 3. 고객 후기 및 신뢰도 구축 (내돈내산, 후기 키워드 반영) -->
+    <section id="review">
+      <h2>실제 고객 내돈내산 아파트 포장이사 후기</h2>
+      <p>저희 아파트 이사 서비스는 수많은 고객님들의 꼼꼼한 후기를 통해 검증되었습니다. 단순히 가격이 싼곳보다는, 만족스러운 서비스를 제공하는 업체를 선택해야 합니다. 다음은 실제 이용 고객님들의 <span class="highlight">내돈내산 후기</span> 일부입니다.</p>
+
+      <div class="review-card">
+        <p class="review-rating">★★★★★</p>
+        <p>"서울 잠실에서 경기 하남으로 이사했습니다. 아파트 고층이라 걱정했는데, 사다리차 전문가분들이 신속하게 짐을 내려주셨고, 주방 정리 전문가분이 식기류까지 깔끔하게 정리해줘서 이사 당일에 바로 식사할 수 있었어요. 정말 <span class="highlight">아파트 포장이사 추천</span>할 만합니다."</p>
+        <span class="review-author">김** 고객님 (서울 잠실 → 경기 하남)</span>
+      </div>
+      <div class="review-card">
+        <p class="review-rating">★★★★★</p>
+        <p>"다른 이사업체 후기를 보고 고생했다는 경험이 많아서 이번에는 신중하게 알아봤습니다. 견적 상담부터 꼼꼼했고, 특히 가구 보호에 신경 써주시는 모습에 감동했습니다. 짐이 많아 걱정이었는데, 추가 비용 없이 약속대로 완벽하게 마무리해주셨어요."</p>
+        <span class="review-author">박** 고객님 (부산 해운대구 → 부산 연제구)</span>
+      </div>
+      <div class="review-card">
+        <p class="review-rating">★★★★☆</p>
+        <p>"이사 후 정리가 관건이었는데, 저희 집은 아이들 장난감과 책이 많아서 힘들었을 겁니다. 전문가분들이 아이 방까지 정리해주셔서 이사 후 스트레스가 확 줄었습니다. <span class="highlight">이사짐센터 싼곳</span>만 찾기보다 서비스 질을 꼭 확인하세요."</p>
+        <span class="review-author">이** 고객님 (인천 송도)</span>
+      </div>
+    </section>
+
+    <!-- 4. 아파트 이사 체크리스트 (정보성 콘텐츠로 체류시간 증가) -->
+    <section id="checklist">
+      <h2>2026년 아파트 포장이사 D-DAY 체크리스트</h2>
+      <p>성공적인 아파트 이사를 위해 미리 준비해야 할 사항들을 정리했습니다. 이 체크리스트를 활용하여 꼼꼼하게 이사를 준비해보세요.</p>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>시점</th>
+            <th>주요 준비 사항</th>
+            <th>세부 내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>이사 1~2개월 전</td>
+            <td><strong>이사 업체 선정 및 계약</strong></td>
+            <td>방문 견적을 통해 2~3곳 비교. 계약서에 비용, 시간, 서비스 범위 명시 확인. 사다리차, 에어컨 설치 등 옵션 확인.</td>
+          </tr>
+          <tr>
+            <td>이사 2주 전</td>
+            <td><strong>짐 정리 및 폐기물 처리</strong></td>
+            <td>불필요한 짐 버리기. 폐가전, 대형 폐기물 처리 예약 (구청 문의).</td>
+          </tr>
+          <tr>
+            <td>이사 1주 전</td>
+            <td><strong>각종 주소지 변경 및 통신사 이전 신청</strong></td>
+            <td>우체국 주소지 변경 서비스, 통신사(인터넷/TV) 이전 신청. 관리사무소에 엘리베이터 사용 예약.</td>
+          </tr>
+          <tr>
+            <td>이사 당일</td>
+            <td><strong>이사팀 현장 감독 및 공과금 정산</strong></td>
+            <td>파손 여부 확인, 가구 배치 지시. 도시가스 차단, 전기/수도 요금 정산.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>출처: <a href="http://www.kostat.go.kr" target="_blank">통계청 이사 동향 통계</a> (이사 준비에 도움되는 공신력 있는 정보 제공)</p>
+    </section>
+
+    <!-- 5. 전국 서비스 지역 안내 및 지역 키워드 삽입 (SEO 강화) -->
+    <section id="cities">
+      <h2>전국 아파트 포장이사 서비스 가능 지역 (30+ 지역)</h2>
+      <p>저희 아파트 이사 서비스는 전국 어디든 전문 인력이 투입 가능합니다. 거주하시는 지역을 확인하시고, 안심하고 견적을 신청해주세요. 지역별 특성에 맞는 맞춤형 이사를 제공합니다.</p>
+      <ul>
+        <li><strong>수도권:</strong> 서울(강남, 송파, 서초, 강동, 강북), 경기도(수원, 용인, 성남, 분당, 일산, 파주, 화성, 평택, 안양, 부천, 김포, 하남, 남양주, 의정부, 양주)</li>
+        <li><strong>충청권:</strong> 대전, 세종, 천안, 청주, 아산, 공주</li>
+        <li><strong>영남권:</strong> 부산(해운대, 수영, 동래), 대구(수성구), 울산, 창원, 김해, 포항</li>
+        <li><strong>호남권:</strong> 광주, 전주, 여수, 목포</li>
+        <li><strong>기타:</strong> 강원도(춘천, 원주), 제주도</li>
+      </ul>
+      <p>특히 아파트 이사 경험이 많은 이사짐센터를 선택하는 것이 중요합니다. <span class="highlight">지역별 이사 전문가</span>에게 지금 바로 문의하세요.</p>
+      <div class="cta-section">
+        <a href="#quote-form" class="cta-btn">거주 지역 아파트 이사 견적 문의</a>
+      </div>
+    </section>
+
+    <!-- 6. FAQ (체류시간 증가 및 정보 제공) -->
+    <section id="faq">
+      <h2>자주 묻는 질문 (FAQ) - 아파트 포장이사편</h2>
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <div class="faq-question">Q1: 아파트 포장이사 비용은 어떻게 책정되나요?</div>
+          <div class="faq-answer">A: 기본적으로 짐의 양(평수 기준), 이사 거리, 작업 인원 수, 사다리차 사용 여부, 이사 시기(성수기/비수기)에 따라 책정됩니다. 추가 옵션(예: 에어컨 설치, 입주 청소)에 따라 비용이 추가될 수 있습니다.</div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <div class="faq-question">Q2: 이사 당일 아파트 엘리베이터 사용 예약은 어떻게 해야 하나요?</div>
+          <div class="faq-answer">A: 아파트의 경우 관리사무소에 이사 날짜와 시간을 미리 알려주고 엘리베이터 사용 예약금을 지불해야 합니다. 예약 없이 진행하면 이사에 차질이 생길 수 있으므로, 최소 1주일 전에는 관리사무소와 협의해야 합니다.</div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <div class="faq-question">Q3: 짐이 적은 아파트(원룸/투룸)도 포장이사가 가능한가요?</div>
+          <div class="faq-answer">A: 네, 가능합니다. 짐의 양에 따라 1톤, 1.5톤 등 맞춤형 이사 서비스를 제공합니다. 짐이 적다고 해도 포장이나 운반에 어려움이 있다면 전문 포장이사를 이용하는 것이 효율적입니다.</div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <div class="faq-question">Q4: 이사 중 가구 파손이 발생하면 어떻게 보상받을 수 있나요?</div>
+          <div class="faq-answer">A: 관허업체는 적재물 배상책임보험에 가입되어 있습니다. 이사 중 발생하는 물품 파손이나 손상에 대해 보상을 받을 수 있습니다. 계약서 작성 시 보험 가입 여부와 보상 기준을 반드시 확인해야 합니다.</div>
+        </div>
+      </div>
+      <p>관련 정보 출처: <a href="http://www.naumwiki.org/wiki/포장이사" target="_blank">나무위키 포장이사 정보</a> (포장이사 업체 선정 기준 및 주의사항)</p>
+    </section>
+
+    <!-- 7. 공신력 있는 외부 링크 섹션 -->
+    <section>
+      <h2>공신력 있는 외부 참고 자료</h2>
+      <p>성공적인 아파트 이사를 위해 공신력 있는 기관의 정보를 참고해보세요. 이사 전후로 필요한 행정 절차 및 소비자 보호 정보를 확인할 수 있습니다.</p>
+      <ul>
+        <li><a href="http://www.mlit.go.kr" target="_blank">국토교통부 (이사 관련 법규 및 정책)</a></li>
+        <li><a href="http://www.kostat.go.kr/portal/korea/kor_nw/2/6/1/index.board?b_srch_article=1&aId=3000551&c_p=3&s_p=3&catgNo=6" target="_blank">통계청 주거실태조사 (이사 관련 통계)</a></li>
+        <li><a href="http://www.consumer.go.kr" target="_blank">한국소비자원 (이사 서비스 관련 피해 구제 정보)</a></li>
+        <li><a href="http://www.gimpo.go.kr/portal/contents.do?key=4792" target="_blank">지방자치단체 이사 관련 지원 정책 (예시: 김포시)</a></li>
+      </ul>
+    </section>
+
+    <!-- 8. 견적 요청 폼 (체류시간 증가 및 전환 유도) -->
+    <section id="quote-form">
+      <h2>아파트 포장이사 무료 견적 요청</h2>
+      <p>이사 날짜, 출발지, 도착지, 짐의 양을 입력해주시면 정확한 맞춤 견적을 무료로 제공해드립니다. 지금 바로 문의해보세요.</p>
+      <form action="/submit-quote" method="post">
+        <label for="name">이름</label><input type="text" id="name" name="name" required placeholder="이름을 입력해주세요">
+        <label for="phone">연락처</label><input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
+        <label for="move-type">이사 종류</label>
+        <select id="move-type" name="move-type">
+          <option value="apartment-premium">프리미엄 아파트 포장이사</option>
+          <option value="apartment-standard">일반 아파트 포장이사</option>
+          <option value="storage">아파트 짐 보관 이사</option>
+          <option value="other">기타 이사 (사무실 등)</option>
+        </select>
+        <label for="start-address">출발지 주소 (아파트명, 동호수 포함)</label><textarea id="start-address" name="start-address" rows="2" required placeholder="예: 경기도 양주시 XXX아파트 101동 101호"></textarea>
+        <label for="end-address">도착지 주소 (아파트명, 동호수 포함)</label><textarea id="end-address" name="end-address" rows="2" required placeholder="예: 서울특별시 강남구 XXX아파트 202동 202호"></textarea>
+        <label for="move-date">이사 희망 날짜</label><input type="date" id="move-date" name="move-date" required>
+        <label for="details">추가 요청 사항 (이사 짐의 양, 특이사항, 에어컨 설치 등)</label><textarea id="details" name="details" rows="3" placeholder="예: 25평 아파트, 가전/가구 많음, 에어컨 2대 설치 필요"></textarea>
+        <button type="submit" class="cta-btn">무료 견적 요청하기</button>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 아파트 포장이사 전문가 그룹. 경기도 양주시 XXX로 XX. 대표: 홍길동. 사업자등록번호: 123-45-67890</p>
+      <p>고객센터: 031-XXX-XXXX | 이메일: example@example.com</p>
+    </div>
+  </footer>
+
+  <!-- 스크립트: FAQ 아코디언 기능 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const questions = document.querySelectorAll('.faq-question');
+      questions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const isActive = question.classList.contains('active');
+
+          // 모든 답변 닫기 (아코디언 기능)
+          document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+          document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+
+          // 현재 질문에 대한 답변 열기/닫기
+          if (!isActive) {
+            question.classList.add('active');
+            answer.style.display = 'block';
+          } else {
+            question.classList.remove('active');
+            answer.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+
+  
